@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sakshi (Jaanu) ✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 60px 40px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hearts {
+            font-size: 60px;
+            margin-bottom: 30px;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .name {
+            font-size: 48px;
+            color: #764ba2;
+            margin-bottom: 10px;
+            font-weight: bold;
+            animation: fadeIn 1s ease-out 0.3s both;
+        }
+
+        .nickname {
+            font-size: 28px;
+            color: #e74c3c;
+            margin-bottom: 30px;
+            font-style: italic;
+            animation: fadeIn 1s ease-out 0.6s both;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        .message {
+            font-size: 18px;
+            color: #333;
+            line-height: 1.8;
+            margin: 30px 0;
+            animation: fadeIn 1s ease-out 0.9s both;
+        }
+
+        .reveal-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 40px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            animation: fadeIn 1s ease-out 1.2s both;
+        }
+
+        .reveal-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 25px rgba(118, 75, 162, 0.4);
+        }
+
+        .reveal-btn:active {
+            transform: scale(0.98);
+        }
+
+        .hidden-message {
+            display: none;
+            font-size: 20px;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-top: 30px;
+            animation: popIn 0.6s ease-out;
+        }
+
+        @keyframes popIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.5);
+            }
+            50% {
+                transform: scale(1.1);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .show {
+            display: block !important;
+        }
+
+        .heart {
+            position: fixed;
+            color: #e74c3c;
+            font-size: 30px;
+            animation: rise 3s ease-in forwards;
+            pointer-events: none;
+        }
+
+        @keyframes rise {
+            0% {
+                opacity: 1;
+                transform: translateY(0) translateX(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-800px) translateX(100px) rotate(360deg);
+            }
+        }
+
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background: #667eea;
+            animation: confetti-fall 3s ease-in forwards;
+            pointer-events: none;
+        }
+
+        @keyframes confetti-fall {
+            0% {
+                opacity: 1;
+                transform: translateY(0) rotate(0deg);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(800px) rotate(720deg);
+            }
+        }
+
+        .proposal-text {
+            font-size: 24px;
+            color: #e74c3c;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 20px;
+            }
+            .name {
+                font-size: 36px;
+            }
+            .nickname {
+                font-size: 22px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="hearts">💕</div>
+        <div class="name">Sakshi</div>
+        <div class="nickname">(Jaanu ✨)</div>
+        
+        <div class="message">
+            <p>Ek baat kehna chahta hoon...</p>
+        </div>
+
+        <button class="reveal-btn" onclick="revealMessage()">Click Here 💌</button>
+
+        <div class="hidden-message" id="hiddenMsg">
+            <p style="margin-bottom: 20px;">Tum mere liye bahut special ho...</p>
+            <div class="proposal-text">Will you be mine? ❤️</div>
+            <p style="margin-top: 20px; font-size: 18px;">Isse pehle ke main aur intezaar karu...</p>
+        </div>
+    </div>
+
+    <script>
+        function revealMessage() {
+            const hiddenMsg = document.getElementById('hiddenMsg');
+            hiddenMsg.classList.add('show');
+            
+            // Create floating hearts
+            for (let i = 0; i < 15; i++) {
+                createHeart();
+            }
+            
+            // Create confetti
+            for (let i = 0; i < 30; i++) {
+                createConfetti();
+            }
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = '❤️';
+            heart.className = 'heart';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = window.innerHeight + 'px';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => heart.remove(), 3000);
+        }
+
+        function createConfetti() {
+            const confetti = document.createElement('div');
+            confetti.className = 'confetti';
+            confetti.style.left = Math.random() * window.innerWidth + 'px';
+            confetti.style.top = -10 + 'px';
+            confetti.style.backgroundColor = ['#667eea', '#764ba2', '#e74c3c', '#f39c12'][Math.floor(Math.random() * 4)];
+            document.body.appendChild(confetti);
+            
+            setTimeout(() => confetti.remove(), 3000);
+        }
+    </script>
+</body>
+  </html>
